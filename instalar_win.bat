@@ -1,5 +1,25 @@
 @ECHO OFF
 
+call:cor f1 "Verificando se o Python está instalado..."
+
+pause
+
+pip --version 2> nul || GOTO :erropip
+
+pip --version | findstr "pip 2"
+
+:erropip
+
+if %errorlevel% equ 0 (
+    call:cor f1 "python OK"
+) else (
+    echo Python não encontrado favor instalar e reiniciar esse script
+    pause
+    powershell.exe -Command "Start-Process -FilePath 'https://www.python.org/ftp/python/3.10.0/python-3.10.0-amd64.exe' -ArgumentList '/quiet InstallAllUsers=1 PrependPath=1' -Wait"
+    GOTO :fim
+)
+
+
 call:cor f1 "instalado componentes"
 
 timeout /t 10
@@ -48,3 +68,5 @@ for /f "delims=" %%a in ('cmd /k prompt $h$h ^<^&1') do echo %%a
 goto:eof
 
 :fim
+
+pause
