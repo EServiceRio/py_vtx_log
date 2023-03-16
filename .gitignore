@@ -3,7 +3,7 @@
 __pycache__
 venv
 pacotes npm
-*.sqlite3
+#*.sqlite3
 *.exe
 
 .DS_Store
